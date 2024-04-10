@@ -17,7 +17,7 @@ services:
     volumes:
       - /home/deisi/lusofona-gateway/multimedia/djangoapp/static/:/data/static
       - /home/deisi/lusofona-gateway/multimedia/djangoapp/media/:/data/media
-    ports:
+    expose:
       - "8000"
     depends_on:
       - db
