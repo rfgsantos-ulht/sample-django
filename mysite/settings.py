@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
+
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,10 +30,10 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG")
 
 # Change to lusofona domain
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["https://projects.deisi.ulusofona.pt", "http://projects.deisi.ulusofona.pt"]
 # Chango to lusofona domain
-CSRF_TRUSTED_ORIGINS = ['http://localhost', 'https://localhost']
-
+CSRF_TRUSTED_ORIGINS = ['http://localhost', 'https://localhost', 'https://projects.deisi.ulusofona.pt',
+                        'http://projects.deisi.ulusofona.pt']
 
 # Application definition
 
@@ -76,7 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "mysite.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -90,7 +90,6 @@ DATABASES = {
         'PORT': os.environ.get('DATABASE_PORT')
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -110,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -122,17 +120,16 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 USE_X_FORWARDED_HOST = True
 
-#SESSION_COOKIE_PATH = '/content/'
+# SESSION_COOKIE_PATH = '/content/'
 #
-#LOGIN_URL = "login/"
-#LOGIN_REDIRECT_URL = '/content/'
-#LOGOUT_REDIRECT_URL = '/content/'
+# LOGIN_URL = "login/"
+# LOGIN_REDIRECT_URL = '/content/'
+# LOGOUT_REDIRECT_URL = '/content/'
 
 STATIC_URL = "djangoapp/static/"
 
