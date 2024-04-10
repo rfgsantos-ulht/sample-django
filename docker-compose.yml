@@ -1,0 +1,50 @@
+version: '3'
+services:
+  mywebsite:
+    image: mywebsite:latest
+    build:
+      context: ./
+      args:
+        APP_PORT: 8000
+    container_name: mywebsite
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_USER=santorui
+      - DATABASE_PASSWORD=root
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=mywebsite
+      - STATIC_ROOT=/data/static
+      - MEDIA_ROOT=/data/media
+      - DEBUG=False
+    networks:
+      - database-network
+      - gateway-network
+    volumes:
+      - /home/deisi/lusofona-gateway/multimedia/djangoapp/static/:/data/static
+      - /home/deisi/lusofona-gateway/multimedia/djangoapp/media/:/data/media
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    container_name: mywebsite_db
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=mywebsite
+      - POSTGRES_USER=santorui
+    networks:
+      - database-network
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+
+networks:
+  database-network:
+    driver: bridge
+  gateway-network:
+    external: true
+
+
