@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG")
 
 # Change to lusofona domain
-ALLOWED_HOSTS = ["https://projects.deisi.ulusofona.pt", "http://projects.deisi.ulusofona.pt"]
+ALLOWED_HOSTS = ["https://projects.deisi.ulusofona.pt", "http://projects.deisi.ulusofona.pt", "ulusofona"]
 # Chango to lusofona domain
 CSRF_TRUSTED_ORIGINS = ['http://localhost', 'https://localhost', 'https://projects.deisi.ulusofona.pt',
                         'http://projects.deisi.ulusofona.pt']
