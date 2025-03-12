@@ -1,5 +1,5 @@
 FROM python:3.9
-ENV PYTHONBUFFERED 1
+
 ARG APP_PORT
 
 COPY ./ ./
