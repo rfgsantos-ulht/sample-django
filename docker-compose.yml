@@ -1,4 +1,3 @@
-version: '3'
 services:
   mywebsite:
     image: mywebsite:latest
