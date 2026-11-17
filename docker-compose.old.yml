@@ -1,0 +1,42 @@
+services:
+  mywebsite:
+    image: mywebsite:latest
+    build:
+      context: ./
+      args:
+        APP_PORT: 8000
+    container_name: mywebsite
+    env_file:
+      - .env
+    environment:
+      - DATABASE_HOST=db
+    networks:
+      - database-network
+      - gateway-network
+    volumes:
+      - /home/deisi/lusofona-gateway/multimedia/djangoapp/static/:/data/static
+      - /home/deisi/lusofona-gateway/multimedia/djangoapp/media/:/data/media
+    expose:
+      - "8000"
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    container_name: mywebsite_db
+    env_file:
+      - .db.env
+    networks:
+      - database-network
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+
+networks:
+  database-network:
+    driver: bridge
+  gateway-network:
+    external: true
+
+

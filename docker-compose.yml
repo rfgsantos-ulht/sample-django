@@ -1,42 +1,9 @@
+# Sample "student" project for the local test. Copy this folder into the test student repository.
+# The bind mount checks that deployed files are found at the same path by Docker.
 services:
-  mywebsite:
-    image: mywebsite:latest
-    build:
-      context: ./
-      args:
-        APP_PORT: 8000
-    container_name: mywebsite
-    env_file:
-      - .env
-    environment:
-      - DATABASE_HOST=db
-    networks:
-      - database-network
-      - gateway-network
+  web:
+    image: nginx:1.27-alpine
+    ports:
+      - "18080:80"
     volumes:
-      - /home/deisi/lusofona-gateway/multimedia/djangoapp/static/:/data/static
-      - /home/deisi/lusofona-gateway/multimedia/djangoapp/media/:/data/media
-    expose:
-      - "8000"
-    depends_on:
-      - db
-  db:
-    image: postgres:latest
-    container_name: mywebsite_db
-    env_file:
-      - .db.env
-    networks:
-      - database-network
-    volumes:
-      - db_data:/var/lib/postgresql/data
-
-volumes:
-  db_data:
-
-networks:
-  database-network:
-    driver: bridge
-  gateway-network:
-    external: true
-
-
+      - ./html:/usr/share/nginx/html:ro
